@@ -8,6 +8,7 @@ package ai.alt.category.server;
 import ai.alt.category.crawl.service.CategoryService;
 import ai.alt.category.crawl.service.entity.Category;
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -83,8 +84,8 @@ public class MAIN {
         handler.start();
 
         //Setup and start server
-        int serverPort = 1025;
-        Server server = new Server(serverPort);
+        int serverPort = 80;
+        Server server = new Server(new InetSocketAddress("0.0.0.0", serverPort));
         server.setHandler(new AbstractHandler() {
             @Override
             public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
