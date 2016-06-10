@@ -1,0 +1,112 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Alt Category</title>
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>    
+
+    <link rel="icon" href="http://alt.ai/corporate/content/images/favicon.ico">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script src="category-controller.js"></script>
+
+<style type="text/css">
+  hr{
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+  a{
+    cursor: pointer;
+  }
+</style>
+
+  </head>
+
+  <body ng-app="app" ng-cloak ng-controller="CategoryController">
+
+<!-- HEADER -->    
+<header>
+    <div class="navbar navbar-fixed-top navbar-default">
+        <div class="container">           
+            <a href="/" class="navbar-brand" style="color: #000; font-family: monospace; font-size: 30px"><b>ALT Category</b></a>
+
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div class="collapse navbar-collapse navHeaderCollapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/"><b>Home</b></a>
+                    </li>
+                    <li>
+                        <a ng-click="alertStats()"><b>Stats</b></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>    
+<br/>
+<br/>
+
+
+
+
+<div class="container">
+
+<br/>
+<img src="loading.gif" ng-show="parent == null"/>
+
+<a ng-click="isLoadingGoback=true; load(1)" ng-show="parent != null && parent.id != 1">Go Home&nbsp;&nbsp;</a>
+<a ng-click="isLoadingGoback=true; load(parent.parentId)" ng-show="parent != null && parent.id != 1">Go Back</a>
+<img src="loading.gif" ng-show="isLoadingGoback && parent != null && parent.id != 1"/>
+
+<h5 ng-show="parent != null">Current page: {{parent.name}}</h5>
+<hr ng-show="parent != null"/>
+
+<div ng-show="subcategories != null && subcategories.length >0">
+  <h5>Subcategories ({{subcategories.length}}) :</h5>
+  <hr style="" />
+  <div ng-repeat="category in subcategories">  
+    <a ng-click="category.isLoading = true;load(category.id)">{{category.name}}</a>
+    <img src="loading.gif" ng-show="category.isLoading"/>
+  </div>
+</div>
+
+<div ng-show="pages != null && pages.length >0">
+  <h5>Pages ({{pages.length}}) :</h5>
+  <hr/>
+  <div ng-repeat="category in pages">  
+    <a href="{{category.url}}" title="Goto wiki page" target="__blank">{{category.name}}</a>      
+  </div>
+</div>
+</div>
+
+
+
+
+
+<!-- FOOTER -->    
+<br/><br/><br/><br/><br/>
+  </body>
+
+</html>
