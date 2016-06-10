@@ -11,7 +11,7 @@ function CategoryController($scope, $http){
 	$scope.isLoadingGoback = false;
 
 	$scope.load = function(id){
-		$http.post("http://localhost:1025/load?id="+id)
+		$http.post("http://52.193.234.156:1025/load?id="+id)
 		.then(function(response){
 			$scope.parent = response.data.category;
 			$scope.subcategories =  _(response.data.children)
